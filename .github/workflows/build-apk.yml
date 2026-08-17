@@ -19,15 +19,15 @@ jobs:
 
       - name: Download ReVanced CLI
         run: |
-          curl -L https://github.com/revanced/revanced-cli/releases/latest/download/revanced-cli.jar -o cli.jar
+          curl -L -o cli.jar https://github.com/revanced/revanced-cli/releases/download/v4.6.0/revanced-cli-4.6.0-all.jar
 
       - name: Download Patches
         run: |
-          curl -L https://github.com/revanced/revanced-patches/releases/latest/download/revanced-patches.jar -o patches.jar
+          curl -L -o patches.jar https://github.com/revanced/revanced-patches/releases/latest/download/revanced-patches.jar
 
       - name: Download YouTube APK
         run: |
-          curl -L https://github.com/revanced/revanced-patches/releases/download/v2.196.0/youtube.apk -o youtube.apk
+          curl -L -o youtube.apk https://github.com/revanced/revanced-patches/releases/download/v2.196.0/youtube.apk
 
       - name: Patch APK
         run: |
