@@ -17,13 +17,16 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Grant permission
+        run: chmod +x gradlew || true
+
       - name: Download ReVanced CLI
         run: |
           curl -L -o cli.jar https://github.com/revanced/revanced-cli/releases/download/v4.6.0/revanced-cli-4.6.0-all.jar
 
-      - name: Download Patches
+      - name: Download Patches (fixed)
         run: |
-          curl -L -o patches.jar https://github.com/revanced/revanced-patches/releases/latest/download/revanced-patches.jar
+          curl -L -o patches.jar https://github.com/revanced/revanced-patches/releases/download/v2.196.0/revanced-patches-2.196.0.jar
 
       - name: Download YouTube APK
         run: |
