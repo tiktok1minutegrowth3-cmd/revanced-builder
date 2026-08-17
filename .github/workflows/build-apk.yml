@@ -1,0 +1,40 @@
+name: Build APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Download ReVanced CLI
+        run: |
+          curl -L https://github.com/revanced/revanced-cli/releases/latest/download/revanced-cli.jar -o cli.jar
+
+      - name: Download Patches
+        run: |
+          curl -L https://github.com/revanced/revanced-patches/releases/latest/download/revanced-patches.jar -o patches.jar
+
+      - name: Download YouTube APK
+        run: |
+          curl -L https://github.com/revanced/revanced-patches/releases/download/v2.196.0/youtube.apk -o youtube.apk
+
+      - name: Patch APK
+        run: |
+          java -jar cli.jar patch youtube.apk -o revanced.apk -b patches.jar
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: revanced-apk
+          path: revanced.apk
