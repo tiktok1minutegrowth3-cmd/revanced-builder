@@ -17,16 +17,18 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Grant permission
-        run: chmod +x gradlew || true
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y unzip
 
-      - name: Download ReVanced CLI
+      - name: Download CLI (fixed)
         run: |
           curl -L -o cli.jar https://github.com/revanced/revanced-cli/releases/download/v4.6.0/revanced-cli-4.6.0-all.jar
 
-      - name: Download Patches (fixed)
+      - name: Download patches (ZIP → extract)
         run: |
-          curl -L -o patches.jar https://github.com/revanced/revanced-patches/releases/download/v2.196.0/revanced-patches-2.196.0.jar
+          curl -L -o patches.zip https://github.com/revanced/revanced-patches/releases/latest/download/revanced-patches.zip
+          unzip patches.zip
+          mv revanced-patches-*/revanced-patches-*.jar patches.jar
 
       - name: Download YouTube APK
         run: |
